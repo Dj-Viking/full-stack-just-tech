@@ -1,10 +1,15 @@
 const express = require('express');
+const exphbars = require('express-handlebars');
+const hbars = exphbars.create({});
 const path = require('path');
 const routes = require('./routes');
 const sequelize = require('./config/connection.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.engine('handlebars', hbars.engine);
+app.set('view engine', 'handlebars');
 
 //middleware data interception and parsing
 app.use(
