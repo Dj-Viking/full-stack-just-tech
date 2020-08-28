@@ -1,0 +1,31 @@
+{
+  "name": "full-stack-just-tech",
+  "version": "1.0.0",
+  "description": "full stack version of the previously made just-tech-news",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dj-Viking/full-stack-just-tech.git"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "express",
+    "mvc",
+    "handlebars"
+  ],
+  "author": "Anders Ackerman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dj-Viking/full-stack-just-tech/issues"
+  },
+  "homepage": "https://github.com/Dj-Viking/full-stack-just-tech#readme",
+  "dependencies": {
+    "connect-session-sequelize": "^7.0.1",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6"
+  }
+}
