@@ -76,5 +76,14 @@ router.get('/', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   });
-})
+});
+
+router.get('/login', (req, res) => {
+  console.log(`
+  `);
+  console.log("\x1b[33m", "testing loginpage render", "\x1b[00m");
+  console.log(`
+  `);
+  res.render('login');
+});
 module.exports = router;
