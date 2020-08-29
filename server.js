@@ -2,11 +2,12 @@ const express = require('express');
 const exphbars = require('express-handlebars');
 const hbars = exphbars.create({});
 const path = require('path');
-const routes = require('./routes');
+const routes = require('./controllers');
 const sequelize = require('./config/connection.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
 
 app.engine('handlebars', hbars.engine);
 app.set('view engine', 'handlebars');
@@ -22,6 +23,7 @@ app.use(
     }
   )
 );
+// app.use(express.static('public'));
 app.use(
   express.static(
     path.join(
@@ -29,7 +31,6 @@ app.use(
     )
   )
 );
-
 //turn on routes
 app.use(routes);
 
