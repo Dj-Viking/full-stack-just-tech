@@ -45,7 +45,7 @@ sequelize.sync(
     // a foreign key constraint error 
     // this actually resets the database to be empty, false keeps the
     // old data there after the node instance disconnects.
-    force: true  
+    force: false  
   }
 )
 .then(() => {
