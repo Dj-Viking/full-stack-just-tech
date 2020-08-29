@@ -34,5 +34,40 @@ async function signupFormHandler(event) {
   }
 }
 
+async function loginFormHandler(event) {
+  event.preventDefault();
+
+  const email = document.querySelector('#email-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
+
+  if (email && password) {
+    try {
+      const response = await fetch('api/users/login', {
+        method: 'post',
+        body: JSON.stringify(
+          {
+            email,
+            password
+          }
+        ),
+        headers: {
+          'Content-Type': 'applications/json'
+        }
+      });
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        console.log('There was an error');
+        console.log(response.statusText);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
+document.querySelector('.login-form')
+.addEventListener('submit', loginFormHandler);
+
 document.querySelector('.signup-form')
 .addEventListener('submit', signupFormHandler);
