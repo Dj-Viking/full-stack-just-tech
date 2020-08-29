@@ -12,7 +12,7 @@ async function signupFormHandler(event) {
         body: JSON.stringify(
           {
             username: username,
-            email: email,//leaving it as key here works, not sure why it works here but not for the other fetch ???
+            email: email,//leaving it as key here works, not sure why it works here but not for the other fetch...sometimes?? ???
             password: password
           }
         ),
@@ -47,7 +47,7 @@ async function loginFormHandler(event) {
         method: 'post',
         body: JSON.stringify(
           {
-            email: email,//need key value pairs here for some reason
+            email: email,
             password: password
           }
         ),
