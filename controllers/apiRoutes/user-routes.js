@@ -67,6 +67,9 @@ router.post('/', (req, res) => {
   
   `)
   console.log('\x1b[33m', 'client request to post a user', '\x1b[00m');
+  console.log(`
+  
+  `)
   // expects {username: 'name', email: 'email@gmail.com', password: 'password1234'}
   User.create({
     username: req.body.username,
@@ -81,10 +84,14 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+
   console.log(`
   
   `)
   console.log('\x1b[33m', 'client request user login', '\x1b[00m');
+  console.log(`
+  
+  `)
   // expects {email: 'email@gmail.com', password: 'password1234'}
   User.findOne({
     where: {
@@ -104,6 +111,10 @@ router.post('/login', (req, res) => {
     }
 
     res.json({ user: dbUserData, message: 'You are now logged in!' });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
   });
 });
 
