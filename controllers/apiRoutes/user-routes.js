@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Vote, Comment } = require('../../models');
+// const session = require('express-session');
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // get all users
 router.get('/', (req, res) => {
@@ -76,7 +78,20 @@ router.post('/', (req, res) => {
     email: req.body.email,
     password: req.body.password
   })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbUserData => {
+      /**
+       * we want to make sure the session is created before we 
+       * send a response back so we're wrapping the varaibles in a callback.
+       * the req.session.save() method will initiate the creation of the session
+       * and then run the callback function once complete
+       */
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        res.json(dbUserData);
+      });
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -110,7 +125,16 @@ router.post('/login', (req, res) => {
       return;
     }
 
-    res.json({ user: dbUserData, message: 'You are now logged in!' });
+    /**
+     * adding the same session variables to the login route
+     */
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
+    });
   })
   .catch(err => {
     console.log(err);

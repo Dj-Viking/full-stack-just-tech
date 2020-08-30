@@ -1,16 +1,63 @@
 const express = require('express');
-const exphbars = require('express-handlebars');
-const hbars = exphbars.create({});
 const path = require('path');
 const routes = require('./controllers');
 const sequelize = require('./config/connection.js');
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 
+const exphbars = require('express-handlebars');
+const hbars = exphbars.create({});
 app.engine('handlebars', hbars.engine);
 app.set('view engine', 'handlebars');
+
+//creating session store
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+//session object creation here
+/**
+ * secret is a hash based message authentication code used to sign the session cookie
+ * when the cookie is read by the server its going to compare this with the secret to make sure
+ * that the cookie was not modified by the client.
+ * 
+ * cookie object used by the session starts empty
+ * 
+ * resave is set to a value of false, this forces the session to be saved back to the 
+ * session store, even if the cookie hasnt been modified, the default is true, and is deprecated... recommended is false
+ * 
+ * saveuninitialize is set to true when a new session is made the session is saved as part
+ * of the store
+ * 
+ * store: initialize the sequelize store pass a value of an object with db: sequelize
+ * this will create the conection with the database, set up the session table
+ * and save the session to the database.
+ * 
+ * session is made, and now we need to call the express session middleware
+ * 
+ *
+ */
+const sess = {
+  secret: 'Here is my secret!',
+  // default value of cookie is
+  // { path: '/', httpOnly: true, secure: false, maxAge: null }.
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore(
+    {
+      db: sequelize
+    }
+  )
+};
+/**
+ * here is the middleware which then we can now generate session tokens.
+ * if there is a session id is generated and see if this is saved into the table
+ * in the database.
+ */
+app.use(session(sess));
+
 
 //middleware data interception and parsing
 app.use(

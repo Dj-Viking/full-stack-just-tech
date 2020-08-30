@@ -3,6 +3,12 @@ const sequelize = require('../config/connection.js');
 const { Post, User, Comment } = require('../models');
 
 router.get('/', (req, res) => {
+  //this is so this route has access to the user's session
+  //
+  console.log(`
+  `);
+  console.log("\x1b[33m", "checking the request session property object values", "\x1b[00m");
+  console.log(req.session);
   Post.findAll(
     {
       attributes: [
@@ -84,6 +90,12 @@ router.get('/login', (req, res) => {
   console.log("\x1b[33m", "testing loginpage render", "\x1b[00m");
   console.log(`
   `);
+  //if we have the session id from a user and verified they are logged in
+  // redirect them to the homepage
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
   res.render('login');
 });
 module.exports = router;
