@@ -144,6 +144,13 @@ router.post('/login', (req, res) => {
 
 //logout route which will destroy the session variables and resetting the cookie
 router.post('/logout', (req, res) => {
+  console.log(`
+  
+  `)
+  console.log('\x1b[33m', 'client request user logout', '\x1b[00m');
+  console.log(`
+  
+  `)
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
