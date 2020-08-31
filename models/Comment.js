@@ -21,6 +21,9 @@ Comment.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
+      //cant allow this null because then users can post comments
+      // without being logged in...if not verified by the post route first
+      allowNull: false,
       references: {
         model: 'user',
         key: 'id'

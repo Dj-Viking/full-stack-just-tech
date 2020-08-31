@@ -149,6 +149,9 @@ router.put('/upvote', (req, res) => {
   
   `)
   console.log('\x1b[33m', 'client request for user to make an upvote on a post', '\x1b[00m');
+  console.log(`
+  
+  `)
   //make sure the session exists first
   if (req.session) {
     //pass session id along with all destructured properties on req.body
