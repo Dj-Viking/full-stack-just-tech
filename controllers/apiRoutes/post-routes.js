@@ -145,17 +145,45 @@ router.post('/', (req, res) => {
 //PUT upvote /api/posts/upvote
 //user_id is who is voting and post_id is the post the user is voting on
 router.put('/upvote', (req, res) => {
-  //custom static method created in models/Post.js
-  Post.upvote(req.body, { Vote })
-  .then(updatedPostData => {
-    //console.log(updatedPostData);
-    res.json(updatedPostData);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(400).json(err);
-  });
+  console.log(`
+  
+  `)
+  console.log('\x1b[33m', 'client request for user to make an upvote on a post', '\x1b[00m');
+  //make sure the session exists first
+  if (req.session) {
+    //pass session id along with all destructured properties on req.body
+    //custom static method created in models/Post.js
+    Post.upvote(
+      {
+        ...req.body, user_id: req.session.user_id
+      },
+      { Vote }
+    )
+    .then(updatedPostData => {
+      //console.log(updatedPostData);
+      res.json(updatedPostData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  }
+  /**
+   * in this route we're checking that a session exists before 
+   * we even touch the database. then if a session exists,
+   * we're using the saved user_id property on the session to insert a new
+   * record in the vote table.
+   * 
+   * this means that the upvote feature will only work if someone has logged in,
+   * so we should try logging in with a test accout on the front end
+   * to check this.
+   * 
+   * first time we click the upvote button the page will refresh, and the
+   * comment count will have gone up by one..
+   * check if sequelize stops the duplicate entries per user
+   */
 });
+
 router.put('/:id', (req, res) => {
   console.log(`
   
