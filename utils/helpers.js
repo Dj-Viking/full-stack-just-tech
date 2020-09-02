@@ -3,14 +3,17 @@ const format_date = (date) => {
   return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
 };
 
+//this is only used for the word comment to make it plural but...
+// this is th english language we're talking about here... LOL
+// pluralizing anything has exceptions everywhere...these are just a few.
 const format_plural = (word, amount) => {
-  if (word === 'cactus' && amount >= 2 || amount === 0) {
+  if (word === 'cactus' && amount >= 2 || word === 'cactus' && amount <= 1) {
     return 'cacti';
-  }
-  if (word === 'deer' && amount >= 2 || amount === 0) {
+  } 
+  if (word === 'deer' && amount >= 2 || word === 'deer' && amount <= 1) {
     return 'deer';
   }
-  if (word === 'octopus' && amount >= 2 || amount === 0) {
+  if (word === 'octopus' && amount >= 2 || word === 'octopus' && amount <= 1) {
     return 'octopuses'
   }
   if (amount >= 2 || amount === 0) {
