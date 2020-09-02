@@ -105,7 +105,7 @@ router.get('/:id', (req, res) => {
 });
 
 //create a post, user_id who posted it included!
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   // expects {title: 'title of post', post_url: 'http://someurl.com', user_id: 1}
   console.log(`
   
@@ -146,7 +146,7 @@ router.post('/', (req, res) => {
 
 //PUT upvote /api/posts/upvote
 //user_id is who is voting and post_id is the post the user is voting on
-router.put('/upvote', (req, res) => {
+router.put('/upvote', withAuth, (req, res) => {
   console.log(`
   
   `)
@@ -189,7 +189,7 @@ router.put('/upvote', (req, res) => {
    */
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   console.log(`
   
   `)
