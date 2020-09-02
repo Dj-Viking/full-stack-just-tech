@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection.js');
 //including user into the post routes so we can do JOIN's at some point
 const { Post, User, Vote, Comment } = require('../../models');
+const { withAuth } = require('../../utils/auth.js');
 
 //route to retrieve all posts in the database
 
@@ -226,7 +227,7 @@ router.put('/:id', (req, res) => {
 //update a posts title
 
 //delete a post by id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   console.log(`
   
   `)

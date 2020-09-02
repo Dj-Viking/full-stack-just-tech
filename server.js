@@ -85,7 +85,7 @@ app.use(routes);
 sequelize.sync(
 
   {//if this was true, it would drop and recreate databases on startup
-    // great for maching changes to the Sequelize models, as the database
+    // great for making changes to the Sequelize models, as the database
     // would need a way to understand that something has changed.
     // might need to do a few times but set to false for now.
     //** we set this true now because if its false the we might get
