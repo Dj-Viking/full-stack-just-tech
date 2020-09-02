@@ -9,7 +9,8 @@ const commentFormHandler = async (event) => {
     ];
     //checking we are getting the id of the post with this comment
     // after clicking the add comment button
-    //console.log(comment_text, post_id);
+    console.log(comment_text, post_id);
+    f
     if (comment_text) {
       const response = await fetch('/api/comments', {
         method: 'POST',
@@ -26,7 +27,7 @@ const commentFormHandler = async (event) => {
       if (response.ok) {
         document.location.reload();
       } else {
-        console.log("Must be logged in to do that.");
+        console.log("There was an error.");
         console.log(response.statusText);
       }
     }

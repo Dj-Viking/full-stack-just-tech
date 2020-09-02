@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   console.log(`
   `);
   //checking if the user requesting this page is logged in
-  console.log(req.session);
+  //console.log(req.session);
   //if not logged in deny access
   if (!req.session.user_id) {
     res.status(401).json({error: 'Unauthorized access without logging in to your account'});
@@ -60,7 +60,7 @@ router.get('/', (req, res) => {
       }
     )
     .then(dbPostData => {
-      console.log(dbPostData);
+      //console.log(dbPostData);
       //serialize data before passing to template
       const posts = dbPostData.map(post => post.get({ plain: true }));
       console.log(posts);

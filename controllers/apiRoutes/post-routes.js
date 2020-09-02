@@ -110,11 +110,12 @@ router.post('/', (req, res) => {
   
   `)
   console.log('\x1b[33m', 'client request for user to make a post', '\x1b[00m');
+  console.log(req.body);
   Post.create(
     {
       title: req.body.title,
       post_url: req.body.post_url,
-      user_id: req.body.user_id
+      user_id: req.session.user_id
     }
   )
   .then(dbPostData => {
